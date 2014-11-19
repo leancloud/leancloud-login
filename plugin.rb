@@ -50,3 +50,5 @@ register_css << CSS
   font-family: FontAwesome;
   content: "\\f1d6";
 }
+
+CSS
