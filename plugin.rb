@@ -1,4 +1,4 @@
-gem 'omniauth-leancloud', :github => 'paomian/omniauth-leancloud'
+gem 'omniauth-leancloud', '0.1' :github => 'paomian/omniauth-leancloud'
 
 class LeanCloudAuthenticator < ::Auth::Authenticator
 
