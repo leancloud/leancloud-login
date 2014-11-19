@@ -1,0 +1,6 @@
+# encoding: utf-8
+
+zh_CN:
+  site_settings:
+    leancloud_client_id: "LeanCloud 帐号验证的客户端帐号（Client id）"
+    leancloud_client_secret: "LeanCloud 帐号验证的客户端密码（Client secret）"

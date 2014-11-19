@@ -1,0 +1,5 @@
+login:
+  leancloud_client_id:
+    default: ''
+  leancloud_client_secret:
+    default: ''
