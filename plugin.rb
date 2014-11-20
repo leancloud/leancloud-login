@@ -1,4 +1,4 @@
-gem 'omniauth-leancloud', :github => 'paomian/omniauth-leancloud', :ref => 'fab298388a4f35957f34039e3f8b54fdb5db25b8'
+gem 'omniauth-leancloud', '0.1.1'
 
 class LeanCloudAuthenticator < ::Auth::Authenticator
 
@@ -31,7 +31,7 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
   end
 
   def register_middleware(omniauth)
-    omniauth.provide :leancloud, :setup => lambda { |env|
+    omniauth.provider :leancloud, :setup => lambda { |env|
     strategy = env['omniauth.strategy']
     strategy.options[:client_id] = SiteSetting.leancloud_client_id
     strategy.options[:client_secret] = SiteSetting.leancloud_client_secret
