@@ -27,7 +27,7 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
 
   def after_create_account(user, auth)
     weibo_uid = auth[:uid]
-    ::PluginStore.set('leancloud', "leancloud_id_#{qq_uid}", {user_id: user.id})
+    ::PluginStore.set('leancloud', "leancloud_id_#{lean_uid}", {user_id: user.id})
   end
 
   def register_middleware(omniauth)
@@ -36,6 +36,7 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
     strategy.options[:client_id] = SiteSetting.leancloud_client_id
     strategy.options[:client_secret] = SiteSetting.leancloud_client_secret
     }
+    :scope => "client:info"
   end
 end
 
