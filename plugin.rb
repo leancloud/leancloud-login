@@ -6,22 +6,24 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
     'LeanCloud'
   end
 
-  def after_authenticat(auth_token)
+  def after_authenticate(auth_token)
     result = Auth::Result.new
-
-    email = auth_token[:email]
-    name = auth_token[:username]
-
+    data = auth_token[:info]
+    credentials = auth_token[:credentials]
+    email = data[:email]
+    name = data[:username]
+    raw_info = auth_token[:extra][:raw_info]
+    leancloud_uid = auth_token[:uid]
     current_info = ::PluginStore.get('leancloud', "leancloud_uid_#{}")
 
-    result.user = 
+    result.user =
     if current_info
       User.where(id: current_info[:user_id]).first
     end
 
     result.name = name
     result.email = email
-
+    result.extra_data = {leancloud_uid: auth_token[:uid], raw_info: raw_info}
     result
   end
 
@@ -35,7 +37,7 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
     strategy = env['omniauth.strategy']
     strategy.options[:client_id] = SiteSetting.leancloud_client_id
     strategy.options[:client_secret] = SiteSetting.leancloud_client_secret
-    }
+    },
     :scope => "client:info"
   end
 end
@@ -43,7 +45,7 @@ end
 auth_provider :frame_width => 920,
               :frame_heigth => 800,
               :authenticator => LeanCloudAuthenticator.new,
-              :background_color => 'rgb(230,22,45)'
+              :background_color => 'rgb(100,22,45)'
 
 register_css <<CSS
 
