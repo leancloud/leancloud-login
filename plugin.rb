@@ -1,4 +1,4 @@
-gem 'omniauth-leancloud', '0.1.1'
+gem 'omniauth-leancloud', '0.1.2'
 
 class LeanCloudAuthenticator < ::Auth::Authenticator
 
