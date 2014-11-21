@@ -3,7 +3,7 @@ gem 'omniauth-leancloud', '0.1.2'
 class LeanCloudAuthenticator < ::Auth::Authenticator
 
   def name
-    'LeanCloud'
+    'leancloud'
   end
 
   def after_authenticate(auth_token)
@@ -17,9 +17,9 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
     current_info = ::PluginStore.get('leancloud', "leancloud_uid_#{}")
 
     result.user =
-    if current_info
-      User.where(id: current_info[:user_id]).first
-    end
+      if current_info
+        User.where(id: current_info[:user_id]).first
+      end
 
     result.name = name
     result.email = email
