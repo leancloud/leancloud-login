@@ -49,7 +49,7 @@ auth_provider :frame_width => 920,
 
 register_css <<CSS
 
-.btn-social.LeanCloud:before {
+.btn-social.leancloud:before {
   font-family: FontAwesome;
   content: "\\f1d6";
 }
