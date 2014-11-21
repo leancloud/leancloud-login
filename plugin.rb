@@ -14,7 +14,7 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
     name = data[:username]
     raw_info = auth_token[:extra][:raw_info]
     leancloud_uid = auth_token[:uid]
-    current_info = ::PluginStore.get('leancloud', "leancloud_uid_#{}")
+    current_info = ::PluginStore.get('leancloud', "leancloud_uid_#{leancloud_uid}")
 
     result.user =
       if current_info
@@ -28,8 +28,8 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
   end
 
   def after_create_account(user, auth)
-    weibo_uid = auth[:uid]
-    ::PluginStore.set('leancloud', "leancloud_id_#{lean_uid}", {user_id: user.id})
+    leancloud_uid = auth[:uid]
+    ::PluginStore.set('leancloud', "leancloud_uid_#{leancloud_uid}", {user_id: user.id})
   end
 
   def register_middleware(omniauth)
@@ -45,7 +45,7 @@ end
 auth_provider :frame_width => 920,
               :frame_heigth => 800,
               :authenticator => LeanCloudAuthenticator.new,
-              :background_color => 'rgb(100,22,45)'
+              :background_color => 'rgb(45,135,225)'
 
 register_css <<CSS
 
