@@ -46,12 +46,3 @@ auth_provider :frame_width => 920,
               :frame_heigth => 800,
               :authenticator => LeanCloudAuthenticator.new,
               :background_color => 'rgb(45,135,225)'
-
-register_css <<CSS
-
-.btn-social.leancloud:before {
-  font-family: FontAwesome;
-  content: "\\f1d6";
-}
-
-CSS
