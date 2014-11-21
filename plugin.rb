@@ -15,12 +15,12 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
     raw_info = auth_token[:extra][:raw_info]
     leancloud_uid = auth_token[:uid]
     current_info = ::PluginStore.get('leancloud', "leancloud_uid_#{leancloud_uid}")
-
+    puts current_info
     result.user =
       if current_info
         User.where(id: current_info[:user_id]).first
       end
-
+    puts result.user
     result.name = name
     result.email = email
     result.extra_data = {leancloud_uid: auth_token[:uid], raw_info: raw_info}
