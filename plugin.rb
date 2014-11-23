@@ -14,6 +14,7 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
     name = data[:username]
     raw_info = auth_token[:extra][:raw_info]
     leancloud_uid = auth_token[:uid]
+	puts "***#{leancloud_uid}"
     current_info = ::PluginStore.get('leancloud', "leancloud_uid_#{leancloud_uid}")
     puts current_info
     result.user =
@@ -28,7 +29,7 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
   end
 
   def after_create_account(user, auth)
-    leancloud_uid = auth[:uid]
+    leancloud_uid = auth[:extra_data][:leancloud_uid]
     ::PluginStore.set('leancloud', "leancloud_uid_#{leancloud_uid}", {user_id: user.id})
   end
 
