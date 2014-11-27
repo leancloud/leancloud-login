@@ -8,23 +8,26 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
 
   def after_authenticate(auth_token)
     result = Auth::Result.new
+
     data = auth_token[:info]
     credentials = auth_token[:credentials]
     email = data[:email]
     name = data[:username]
     raw_info = auth_token[:extra][:raw_info]
     leancloud_uid = auth_token[:uid]
-	puts "***#{leancloud_uid}"
+
     current_info = ::PluginStore.get('leancloud', "leancloud_uid_#{leancloud_uid}")
-    puts current_info
+
     result.user =
       if current_info
         User.where(id: current_info[:user_id]).first
       end
-    puts result.user
+
+    result.email_valid = !!true
     result.name = name
     result.email = email
     result.extra_data = {leancloud_uid: auth_token[:uid], raw_info: raw_info}
+    
     result
   end
 
@@ -44,6 +47,15 @@ class LeanCloudAuthenticator < ::Auth::Authenticator
 end
 
 auth_provider :frame_width => 920,
-              :frame_heigth => 800,
+              :frame_heigth => 520,
               :authenticator => LeanCloudAuthenticator.new,
               :background_color => 'rgb(45,135,225)'
+
+register_css <<CSS
+
+.btn-social.leancloud:before {
+  font-family: FontAwesome;
+  content: "\f0c1";
+}
+
+CSS
