@@ -1,3 +1,7 @@
+# name: LeanCLoud登陆插件
+# about: oauth2 for leancloud
+# version: 0.0.1
+# authors: paomian
 gem 'omniauth-leancloud', '0.1.2'
 
 class LeanCloudAuthenticator < ::Auth::Authenticator
